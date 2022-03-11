@@ -1,5 +1,5 @@
 {
-  "name": "bitasker-api",
+  "name": "bittasker-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -50,10 +50,5 @@
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.3",
     "tsc-watch": "^4.6.0"
-  },
-  "_moduleAliases": {
-    "@/resources": "dist/resources",
-    "@/utils": "dist/utils",
-    "@/middleware": "dist/middleware"
   }
 }
