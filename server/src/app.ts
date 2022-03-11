@@ -25,8 +25,8 @@ class App {
         this.initErrorHandling();
         this.initSwagger();
 
-        this.express.use('/api', (req, res) => { res.send('Welcome to Sports API') })
-        this.express.use('/', (req, res) => { res.send('Welcome to Sports API') })
+        this.express.use('/api', (req, res) => { res.send('Welcome to Bittasker') })
+        this.express.use('/', (req, res) => { res.send('Welcome to Bittasker') })
     }
 
     private initMiddleware(): void {

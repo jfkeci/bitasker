@@ -25,6 +25,7 @@
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "joi": "^17.6.0",
+    "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "mongoose": "^6.2.4",
