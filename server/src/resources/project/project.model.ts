@@ -18,10 +18,12 @@ const ProjectSchema = new Schema({
         type: Date,
     },
     importance: {
+        type: Number,
         enum: [0, 1, 2],
         default: 0
     },
     status: {
+        type: Number,
         enum: [0, 1, 2],
         default: 0
     },
@@ -53,6 +55,6 @@ const ProjectSchema = new Schema({
         type: mongoose.Types.ObjectId,
         required: true
     },
-})
+}, { timestamps: true })
 
 export default model<Project>('Project', ProjectSchema);

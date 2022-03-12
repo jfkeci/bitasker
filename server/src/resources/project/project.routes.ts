@@ -16,6 +16,22 @@ class ProjectRoutes {
             controller.createProject
         )
 
+        this.router.patch(
+            `${this.path}/:id`,
+            validation(validate.create),
+            controller.updateProject
+        )
+
+        this.router.delete(
+            `${this.path}/:id`,
+            controller.deleteProject
+        )
+
+        this.router.get(
+            `${this.path}`,
+            controller.getProjects
+        )
+
         return this.router
     }
 
