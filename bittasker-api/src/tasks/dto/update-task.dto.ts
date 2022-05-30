@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class UpdateTaskDto {
   @IsString()
@@ -11,4 +17,7 @@ export class UpdateTaskDto {
   @IsString({ each: true })
   @IsOptional()
   tags?: Array<string>;
+  @IsDateString()
+  @IsOptional()
+  due?: string;
 }

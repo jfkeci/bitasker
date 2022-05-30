@@ -25,8 +25,11 @@ export class TasksService {
     return task;
   }
 
-  async findAll(query: Record<string, any>) {
-    const tasks = await this._findAll({ where: query });
+  async findAll(query: Record<string, any>, include?: Record<string, any>) {
+    const tasks = await this.prisma.tasks.findMany({
+      where: query,
+      include: include ?? null,
+    });
 
     if (!tasks) throw new NotFoundException('No tasks found');
 

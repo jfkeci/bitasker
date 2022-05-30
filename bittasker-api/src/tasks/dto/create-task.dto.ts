@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsDateString,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -23,4 +24,7 @@ export class CreateTaskDto {
   @IsNumber()
   @IsOptional()
   parent?: number;
+  @IsDateString()
+  @IsOptional()
+  due?: string;
 }

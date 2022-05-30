@@ -19,17 +19,18 @@ model comments {
 }
 
 model tasks {
-  id          Int      @id @unique(map: "id_UNIQUE") @default(autoincrement()) @db.UnsignedInt
-  createdBy   Int      @db.UnsignedInt
-  createdAt   DateTime @default(now()) @db.DateTime(0)
-  updatedAt   DateTime @default(now()) @db.DateTime(0)
-  title       String   @db.VarChar(255)
-  description String?  @db.VarChar(510)
+  id          Int       @id @unique(map: "id_UNIQUE") @default(autoincrement()) @db.UnsignedInt
+  createdBy   Int       @db.UnsignedInt
+  createdAt   DateTime  @default(now()) @db.DateTime(0)
+  updatedAt   DateTime  @default(now()) @db.DateTime(0)
+  title       String    @db.VarChar(255)
+  description String?   @db.VarChar(510)
   tags        Json?
-  parent      Int?     @unique(map: "parent_UNIQUE") @db.UnsignedInt
-  users       users    @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user-task")
-  tasks       tasks?   @relation("tasksTotasks_parent", fields: [parent], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tasks_ibfk_1")
-  other_tasks tasks?   @relation("tasksTotasks_parent")
+  parent      Int?      @unique(map: "parent_UNIQUE") @db.UnsignedInt
+  due         DateTime? @db.DateTime(0)
+  users       users     @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user-task")
+  tasks       tasks?    @relation("tasksTotasks_parent", fields: [parent], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tasks_ibfk_1")
+  other_tasks tasks?    @relation("tasksTotasks_parent")
 
   @@index([createdBy], map: "user-task_idx")
 }
