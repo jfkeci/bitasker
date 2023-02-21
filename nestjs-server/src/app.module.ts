@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { envConfig } from './utils/config/env.config';
 import { APP_FILTER, RouterModule } from '@nestjs/core';
+import { EncoderModule } from './encoder/encoder.module';
 import { AuthModule } from './resources/auth/auth.module';
 import { loggerConfig } from './utils/config/logger.config';
 import { routerConfig } from './utils/config/router.config';
@@ -23,6 +24,7 @@ import { HttpExceptionFilter } from './utils/filters/http-exception.filter';
     ),
     RouterModule.register(routerConfig),
     ConfigModule.forRoot(envConfig()),
+    EncoderModule,
     PrismaModule,
     UsersModule,
     AuthModule
