@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# OS
+.DS_Store
+
 # testing
 /coverage
 
