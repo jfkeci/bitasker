@@ -1,8 +1,9 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
-import { login, register } from "../services/auth.service";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { login, register } from '../services/auth.service';
 
 export interface AuthStore {
+  isLoggedIn: boolean;
   authToken: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
@@ -10,13 +11,14 @@ export interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
-  authToken: localStorage.getItem("authToken"),
+  isLoggedIn: false,
+  authToken: localStorage.getItem('authToken'),
 
   login: async (email, password) => {
     try {
       const user = await login(email, password);
 
-      localStorage.setItem("authToken", user.token as string);
+      localStorage.setItem('authToken', user.token as string);
 
       set({ authToken: user.token });
     } catch (error) {
@@ -28,7 +30,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     try {
       const user = await register(email, password);
 
-      localStorage.setItem("authToken", user.token as string);
+      localStorage.setItem('authToken', user.token as string);
 
       set({ authToken: user.token });
     } catch (error) {
@@ -37,12 +39,12 @@ const useAuthStore = create<AuthStore>((set) => ({
   },
 
   logout: () => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem('authToken');
     set({ authToken: null });
   },
 }));
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === 'development') {
   devtools(useAuthStore);
 }
 
