@@ -1,15 +1,25 @@
-import axios from "axios";
-import { User } from "../models/user.model";
+import axios from 'axios';
+import { User } from '../models/user.model';
 
-export const login = async (email: string, password: string): Promise<User> => {
-  const res = await axios.post("/api/login", { email, password });
+export interface LoginUserAttribtues {
+  email: string;
+  password: string;
+}
+
+export const login = async (data: LoginUserAttribtues): Promise<User> => {
+  const res = await axios.post('/api/login', data);
   return res.data;
 };
 
-export const register = async (
-  email: string,
-  password: string
-): Promise<User> => {
-  const res = await axios.post("/api/register", { email, password });
+export interface RegisterUserAttributes {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+}
+
+export const register = async (data: RegisterUserAttributes): Promise<User> => {
+  const res = await axios.post('/api/register', data);
   return res.data;
 };

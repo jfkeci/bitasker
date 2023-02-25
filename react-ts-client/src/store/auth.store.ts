@@ -1,12 +1,17 @@
+import {
+  login,
+  register,
+  LoginUserAttribtues,
+  RegisterUserAttributes,
+} from '../services/auth.service';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { login, register } from '../services/auth.service';
 
 export interface AuthStore {
   isLoggedIn: boolean;
   authToken: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  login: (data: LoginUserAttribtues) => Promise<void>;
+  register: (data: RegisterUserAttributes) => Promise<void>;
   logout: () => void;
 }
 
@@ -14,9 +19,9 @@ const useAuthStore = create<AuthStore>((set) => ({
   isLoggedIn: false,
   authToken: localStorage.getItem('authToken'),
 
-  login: async (email, password) => {
+  login: async (data: LoginUserAttribtues) => {
     try {
-      const user = await login(email, password);
+      const user = await login(data);
 
       localStorage.setItem('authToken', user.token as string);
 
@@ -26,9 +31,9 @@ const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  register: async (email, password) => {
+  register: async (data: RegisterUserAttributes) => {
     try {
-      const user = await register(email, password);
+      const user = await register(data);
 
       localStorage.setItem('authToken', user.token as string);
 
