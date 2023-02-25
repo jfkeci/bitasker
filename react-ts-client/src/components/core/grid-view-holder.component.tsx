@@ -1,9 +1,10 @@
 import React from 'react';
 import UserView from '../../views/user.view';
+import LoginView from '../../views/login.view';
 import WelcomeView from '../../views/welcome.view';
 import RegisterView from '../../views/register.view';
+import NotFoundView from '../../views/not-found.view';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginView from '../../views/login.view';
 
 export default function GridViewHolder() {
   return (
@@ -16,6 +17,7 @@ export default function GridViewHolder() {
             <Route path="/profile" element={<UserView />} />
             <Route path="/register" element={<RegisterView />} />
             <Route path="/login" element={<LoginView />} />
+            <Route path="*" element={<NotFoundView />} />
           </Routes>
         </Router>
       </div>
