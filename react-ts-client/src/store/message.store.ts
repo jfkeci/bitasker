@@ -1,4 +1,3 @@
-import { debounce } from 'lodash';
 import { create } from 'zustand';
 
 interface NewMessage {
@@ -29,9 +28,9 @@ const useMessageStore = create<MessageStore>((set) => ({
         ? Math.max(...(<number[]>state.messages.map((m) => m.id))) + 1
         : 1;
 
-      debounce(() => {
+      setTimeout(() => {
         state.removeMessage(id);
-      }, 500);
+      }, 5000);
 
       return {
         messages: [
