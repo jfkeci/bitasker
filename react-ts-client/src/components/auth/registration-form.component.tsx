@@ -1,9 +1,12 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
 import { RegisterUserAttributes } from '../../services/auth.service';
+import useMessageStore from '../../store/message.store';
 import AuthFormInputComponent from './auth-form-input.component';
 
 export default function RegistrationForm() {
+  const addMessage = useMessageStore((state) => state.addMessage);
+
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
     lastName: '',
@@ -13,12 +16,21 @@ export default function RegistrationForm() {
   } as RegisterUserAttributes);
 
   const registerUser = () => {
+    if (registrationData.password !== registrationData.confirmPassword) {
+      addMessage({ title: 'Passwords should match', type: 'error' });
+      return;
+    }
     console.log(registrationData);
   };
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          registerUser();
+        }}
+      >
         <AuthFormInputComponent
           config={{
             property: 'firstName',
@@ -79,6 +91,8 @@ export default function RegistrationForm() {
             property: 'password',
             label: 'Password',
             placeholder: '********',
+            customValidationMessage:
+              'Password requires at least one upper case letter, one lower case letter, one number and one special character',
             validationSchema: Joi.string()
               .pattern(
                 /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
@@ -101,11 +115,7 @@ export default function RegistrationForm() {
             property: 'confirmPassword',
             label: 'Confirm password',
             placeholder: '********',
-            validationSchema: Joi.string()
-              .alphanum()
-              .min(8)
-              .max(255)
-              .required(),
+            validationSchema: Joi.string().min(8).max(255).required(),
             value: registrationData.confirmPassword,
             onUpdate: (newValue) => {
               setRegistrationData((prevData) => ({

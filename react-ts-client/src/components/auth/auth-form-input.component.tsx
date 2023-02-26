@@ -1,19 +1,22 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
 
-interface AuthFormInputComponentProps {
-  type?: 'text' | 'email' | 'password';
-  label?: string;
-  value: string;
-  placeholder?: string;
-  property: string;
-  onUpdate: (newValue: string) => void;
-  validationSchema: Joi.Schema;
+export interface AuthFormInputComponentProps {
+  config: {
+    property: string;
+    label?: string;
+    value: string;
+    placeholder?: string;
+    type?: 'text' | 'email' | 'password';
+    validationSchema: Joi.Schema;
+    onUpdate: (newValue: string) => void;
+    customValidationMessage?: string;
+  };
 }
 
-export default function AuthFormInputComponent(props: {
-  config: AuthFormInputComponentProps;
-}) {
+export default function AuthFormInputComponent(
+  props: AuthFormInputComponentProps,
+) {
   const [validationError, setValidationError] = useState('');
 
   const validate = (value: string) => {
@@ -45,6 +48,7 @@ export default function AuthFormInputComponent(props: {
           <input
             id={`auth-input-${props.config.property}`}
             type={props.config.type ?? 'text'}
+            name={props.config.property}
             className={
               validationError
                 ? 'bg-red-50 border border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-red-500'
@@ -60,7 +64,9 @@ export default function AuthFormInputComponent(props: {
           />
           {validationError ? (
             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              {validationError}
+              {props.config.type === 'password'
+                ? props.config.customValidationMessage ?? validationError
+                : validationError}
             </p>
           ) : (
             <p></p>
