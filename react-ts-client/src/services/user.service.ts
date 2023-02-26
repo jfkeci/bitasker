@@ -1,15 +1,15 @@
-import axios from "axios";
-import { User } from "../models/user.model";
+import { User } from '../models/user.model';
+import axiosInstance from '../utils/axios.config';
 
 export const getUserById = async (id: string): Promise<User> => {
-  const res = await axios.get(`/api/users/${id}`);
+  const res = await axiosInstance.get(`/api/users/${id}`);
   return res.data;
 };
 
 export const updateUser = async (
   id: string,
-  user: Partial<User>
+  user: Partial<User>,
 ): Promise<User> => {
-  const res = await axios.patch(`/api/users/${id}`, user);
+  const res = await axiosInstance.patch(`/api/users/${id}`, user);
   return res.data;
 };

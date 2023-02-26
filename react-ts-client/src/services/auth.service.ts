@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { User } from '../models/user.model';
+import axiosInstance from '../utils/axios.config';
 
 export interface LoginUserAttribtues {
   email: string;
@@ -7,7 +7,7 @@ export interface LoginUserAttribtues {
 }
 
 export const login = async (data: LoginUserAttribtues): Promise<User> => {
-  const res = await axios.post('/api/login', data);
+  const res = await axiosInstance.post('/api/login', data);
   return res.data;
 };
 
@@ -20,6 +20,6 @@ export interface RegisterUserAttributes {
 }
 
 export const register = async (data: RegisterUserAttributes): Promise<User> => {
-  const res = await axios.post('/api/register', data);
+  const res = await axiosInstance.post('/api/register', data);
   return res.data;
 };
