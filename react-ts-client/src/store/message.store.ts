@@ -1,16 +1,18 @@
 import { create } from 'zustand';
 
+export type AppMessageType = 'error' | 'success' | 'warning';
+
 interface NewMessage {
   title: string;
   body?: string | null;
-  type?: 'error' | 'success' | 'warning';
+  type?: AppMessageType;
 }
 
 export interface AppMessage {
   id: number;
   title: string;
   body?: string | null;
-  type?: 'error' | 'success' | 'warning';
+  type?: AppMessageType;
 }
 
 interface MessageStore {

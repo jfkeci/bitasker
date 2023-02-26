@@ -4,7 +4,10 @@ import {
   BsShieldExclamation,
   BsFillInfoSquareFill,
 } from 'react-icons/bs';
-import useMessageStore, { AppMessage } from '../../../store/message.store';
+import useMessageStore, {
+  AppMessage,
+  AppMessageType,
+} from '../../../store/message.store';
 
 interface MessageComponentProps {
   key: number;
@@ -14,32 +17,40 @@ interface MessageComponentProps {
 export default function Message(props: MessageComponentProps) {
   const removeMessage = useMessageStore((state) => state.removeMessage);
 
-  let Icon = BsFillInfoSquareFill;
+  const messageIconByType = (type: AppMessageType) => {
+    switch (type) {
+      case 'warning':
+        return <BsShieldExclamation />;
+      case 'error':
+        return <BsShieldExclamation />;
+      default:
+        return <BsFillInfoSquareFill />;
+    }
+  };
 
-  const messageClass =
-    'bg-teal-400 border-t-4 border-teal-500 rounded-b text-gray-600 px-4 py-3 shadow-md';
-
-  switch (props.message.type ?? 'success') {
-    case 'warning':
-      messageClass.replace('bg-teal-400', 'bg-red-400');
-      Icon = BsShieldExclamation;
-      break;
-
-    case 'error':
-      messageClass.replace('bg-teal-400', 'bg-red-400');
-      Icon = BsShieldExclamation;
-      break;
-  }
+  const messageClassByType = (type: AppMessageType): string => {
+    switch (type) {
+      case 'warning':
+        return 'bg-orange-400 border-t-4 border-orange-500 rounded-b text-gray-600 px-4 py-3 shadow-md';
+      case 'error':
+        return 'bg-red-400 border-t-4 border-red-500 rounded-b text-gray-600 px-4 py-3 shadow-md';
+      default:
+        return 'bg-teal-400 border-t-4 border-teal-500 rounded-b text-gray-600 px-4 py-3 shadow-md';
+    }
+  };
 
   return (
     <div
       className="m-2 cursor-pointer"
       onClick={() => removeMessage(props.message.id)}
     >
-      <div className={messageClass} role="alert">
+      <div
+        className={messageClassByType(props.message.type as AppMessageType)}
+        role="alert"
+      >
         <div className="flex">
           <div className="py-1">
-            <Icon />
+            {messageIconByType(props.message.type as AppMessageType)}
           </div>
           <div className="ml-auto">
             <p className="font-bold">{props.message.title}</p>
