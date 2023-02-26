@@ -1,5 +1,5 @@
 import { User } from '../models/user.model';
-import axiosInstance from '../utils/axios.config';
+import axiosInstance from '../utils/config/axios.config';
 
 export const getUserById = async (id: string): Promise<User> => {
   const res = await axiosInstance.get(`/api/users/${id}`);

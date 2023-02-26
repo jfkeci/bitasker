@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   id: string;
   firstName?: string;
   lastName?: string;
@@ -7,4 +7,4 @@ export interface User {
   token?: string;
   createdAt?: string;
   updatedAt?: string;
-}
+};

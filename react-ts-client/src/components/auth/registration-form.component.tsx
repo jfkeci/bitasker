@@ -1,30 +1,37 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
-import { RegisterUserAttributes } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 import useAuthStore from '../../store/auth.store';
-import useMessageStore from '../../store/message.store';
 import AuthFormInputComponent from './auth-form-input.component';
+import { RegisterUserAttributes } from '../../services/auth.service';
+import useMessageStore, { AppMessage } from '../../store/message.store';
 
 export default function RegistrationForm() {
   const addMessage = useMessageStore((state) => state.addMessage);
   const register = useAuthStore((state) => state.register);
 
   const [registrationData, setRegistrationData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    firstName: 'Jakov',
+    lastName: 'Sabolicek',
+    email: 'jakov@filpip.com',
+    password: 'Test@1234',
+    confirmPassword: 'Test@1234',
   } as RegisterUserAttributes);
 
-  const registerUser = () => {
+  const registerUser = async () => {
     if (registrationData.password !== registrationData.confirmPassword) {
       addMessage({ title: 'Passwords should match', type: 'error' });
       return;
     }
 
-    register(registrationData);
-    console.log(registrationData);
+    const result: User | AppMessage[] = await register(registrationData);
+
+    if (Array.isArray(result)) {
+      // Response returned a list of errors
+      for (const message of result) {
+        addMessage(message);
+      }
+    }
   };
 
   return (

@@ -5,29 +5,40 @@ import {
   RegisterUserAttributes,
 } from '../services/auth.service';
 import { create } from 'zustand';
+import { User } from '../models/user.model';
+import { AppMessage } from './message.store';
 import { devtools } from 'zustand/middleware';
+import { handleNetworkError } from '../utils/handle-network-error.util';
 
 export interface AuthStore {
-  isLoggedIn: boolean;
+  isLoggedIn: () => boolean;
   authToken: string | null;
-  login: (data: LoginUserAttribtues) => Promise<void>;
-  register: (data: RegisterUserAttributes) => Promise<void>;
+  login: (data: LoginUserAttribtues) => Promise<User | AppMessage[]>;
+  register: (data: RegisterUserAttributes) => Promise<User | AppMessage[]>;
   logout: () => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
-  isLoggedIn: false,
   authToken: localStorage.getItem('authToken'),
+
+  isLoggedIn: (): boolean => {
+    return (
+      !!localStorage.getItem('authToken') && !!localStorage.getItem('userId')
+    );
+  },
 
   login: async (data: LoginUserAttribtues) => {
     try {
       const user = await login(data);
 
       localStorage.setItem('authToken', user.token as string);
+      localStorage.setItem('userId', user.id as string);
 
       set({ authToken: user.token });
-    } catch (error) {
-      console.error(error);
+
+      return <User>user;
+    } catch (error: any) {
+      return handleNetworkError(error);
     }
   },
 
@@ -36,10 +47,13 @@ const useAuthStore = create<AuthStore>((set) => ({
       const user = await register(data);
 
       localStorage.setItem('authToken', user.token as string);
+      localStorage.setItem('userId', user.id as string);
 
       set({ authToken: user.token });
-    } catch (error) {
-      console.error(error);
+
+      return <User>user;
+    } catch (error: any) {
+      return handleNetworkError(error);
     }
   },
 
