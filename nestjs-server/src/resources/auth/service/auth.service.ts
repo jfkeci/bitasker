@@ -50,23 +50,14 @@ export class AuthService {
       throw new ConflictException('Email taken');
     }
 
-    if (data.username) {
-      existingUser = await this.userService._findFirst({
-        where: { username: data.username }
-      });
-
-      if (existingUser) {
-        throw new ConflictException('Username taken');
-      }
-    }
-
     data.password = await bcrypt.hash(data.password, 10);
 
     const user = await this.userService.create({
       data: {
-        username: data.username ?? undefined,
         email: data.email,
-        password: data.password
+        password: data.password,
+        firstName: data.firstName,
+        lastName: data.lastName
       }
     });
 

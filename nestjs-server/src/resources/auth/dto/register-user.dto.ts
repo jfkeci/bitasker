@@ -16,15 +16,20 @@ export class RegisterUserDto {
   email: string;
 
   @IsOptional()
-  @IsString({ message: 'Invalid username' })
+  @IsString({ message: 'Invalid first name' })
   @Matches(/^[a-zA-Z0-9_.]+$/, {
-    message: 'Username should include only letters, numbers, "_" and "."'
+    message: 'First name should include only letters, numbers, "_" and "."'
   })
-  @ApiProperty({
-    required: false,
-    description: 'Optional username, can be added later'
+  @ApiProperty({ required: true })
+  firstName?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Invalid last name' })
+  @Matches(/^[a-zA-Z0-9_.]+$/, {
+    message: 'Last name should include only letters, numbers, "_" and "."'
   })
-  username?: string;
+  @ApiProperty({ required: true })
+  lastName?: string;
 
   @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, {
     message:
