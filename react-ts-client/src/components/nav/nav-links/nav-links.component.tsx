@@ -9,15 +9,33 @@ export default function NavLinks() {
     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         {isLoggedIn() ? (
-          <NavLink href="/encoder" text="Encoder" active={false} />
+          <NavLink
+            href="/encoder"
+            text="Encoder"
+            active={window.location.pathname.includes('encoder')}
+          />
         ) : (
-          <NavLink href="/login" text="Login" active={false} />
+          <NavLink
+            href="/login"
+            text="Login"
+            active={window.location.pathname.includes('login')}
+          />
         )}
 
         {isLoggedIn() ? (
-          <NavLink href="/profile" text="Profile" active={false} />
+          <></>
         ) : (
-          <NavLink href="/register" text="Register" active={false} />
+          <NavLink
+            href="/register"
+            text="Register"
+            active={window.location.pathname.includes('register')}
+          />
+        )}
+
+        {isLoggedIn() ? (
+          <NavLink href="/logout" text="Logout" active={false} />
+        ) : (
+          <></>
         )}
       </ul>
     </div>
