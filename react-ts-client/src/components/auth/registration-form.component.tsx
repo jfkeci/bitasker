@@ -1,11 +1,13 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
 import { RegisterUserAttributes } from '../../services/auth.service';
+import useAuthStore from '../../store/auth.store';
 import useMessageStore from '../../store/message.store';
 import AuthFormInputComponent from './auth-form-input.component';
 
 export default function RegistrationForm() {
   const addMessage = useMessageStore((state) => state.addMessage);
+  const register = useAuthStore((state) => state.register);
 
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
@@ -20,6 +22,8 @@ export default function RegistrationForm() {
       addMessage({ title: 'Passwords should match', type: 'error' });
       return;
     }
+
+    register(registrationData);
     console.log(registrationData);
   };
 
