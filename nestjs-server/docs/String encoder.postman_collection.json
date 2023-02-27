@@ -1,0 +1,385 @@
+{
+	"info": {
+		"_postman_id": "83600da0-3602-4ac1-9361-5f2215432516",
+		"name": "String encoder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15523728"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Tester\",\n    \"lastName\": \"TestLastName\",\n    \"email\": \"tester1@test.com\",\n    \"password\": \"Test@1234\",\n    \"confirmPassword\": \"Test@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - valid response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Tester\",\n    \"lastName\": \"TestLastName\",\n    \"email\": \"tester1@test.com\",\n    \"password\": \"Test@1234\",\n    \"confirmPassword\": \"Test@1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "440"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b8-wiIhwznvUkoWbSr7yhufweaMrzE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Feb 2023 08:05:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d92db261-d216-4521-a9d2-370800c1640b\",\n    \"firstName\": \"Tester\",\n    \"lastName\": \"TestLastName\",\n    \"email\": \"tester1@test.com\",\n    \"password\": null,\n    \"createdAt\": \"2023-02-27T08:05:04.000Z\",\n    \"updatedAt\": \"2023-02-27T08:05:04.000Z\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MmRiMjYxLWQyMTYtNDUyMS1hOWQyLTM3MDgwMGMxNjQwYiIsIm5vdGlmaWNhdGlvbnMiOmZhbHNlLCJpYXQiOjE2Nzc0ODUxMDQsImV4cCI6MTY4MDA3NzEwNH0.h-HGlhJYp_wCf28Wdmj1O2eJNC-MP5ABNj47Nc5iSIY\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tester1@test.com\",\n    \"password\": \"Test@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - valid response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"tester1@test.com\",\n    \"password\": \"Test@1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "440"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b8-jKyz78zlqN5+tvULU3/TF09qZjA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Feb 2023 08:07:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d92db261-d216-4521-a9d2-370800c1640b\",\n    \"firstName\": \"Tester\",\n    \"lastName\": \"TestLastName\",\n    \"email\": \"tester1@test.com\",\n    \"password\": null,\n    \"createdAt\": \"2023-02-27T08:05:04.000Z\",\n    \"updatedAt\": \"2023-02-27T08:05:04.000Z\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MmRiMjYxLWQyMTYtNDUyMS1hOWQyLTM3MDgwMGMxNjQwYiIsIm5vdGlmaWNhdGlvbnMiOmZhbHNlLCJpYXQiOjE2Nzc0ODUyNTAsImV4cCI6MTY4MDA3NzI1MH0.lQDNbIqjCMXthdlKZh6qgTH82IhBhUt8TNQg1S_0d3k\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Encoder",
+			"item": [
+				{
+					"name": "Encode string",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/encode",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"encode"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 - invalid string",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/encode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"encode"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "254"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fe-4Q+PeXNX3yPlZqmJI0nu3N6R+A4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Feb 2023 08:06:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"code\": 400,\n            \"title\": \"BadRequestException\",\n            \"message\": \"Text required\"\n        },\n        {\n            \"code\": 400,\n            \"title\": \"BadRequestException\",\n            \"message\": \"Text should be a valid string\"\n        },\n        {\n            \"code\": 400,\n            \"title\": \"BadRequestException\",\n            \"message\": \"Text should only contain letters\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "200 - valid response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"AAABBCCLLLLLL\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/encode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"encode"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "19"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13-+qe+MQUvqtnDqfRzyQ5jhfEk7qI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 27 Feb 2023 08:08:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"text\": \"A3B2C2L6\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3001"
+		},
+		{
+			"key": "authToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MmRiMjYxLWQyMTYtNDUyMS1hOWQyLTM3MDgwMGMxNjQwYiIsIm5vdGlmaWNhdGlvbnMiOmZhbHNlLCJpYXQiOjE2Nzc0ODUxMjcsImV4cCI6MTY4MDA3NzEyN30.Ph1wUuXrN2226WxyMU3u0Ca8X3MKhsh4N0eODOUqx7Q"
+		}
+	]
+}

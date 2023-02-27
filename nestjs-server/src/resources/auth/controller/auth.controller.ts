@@ -5,7 +5,8 @@ import {
   ApiConflictResponse,
   ApiNotFoundResponse,
   ApiBadRequestResponse,
-  ApiUnauthorizedResponse
+  ApiUnauthorizedResponse,
+  ApiCreatedResponse
 } from '@nestjs/swagger';
 import {
   ConflictExceptionResponse,
@@ -15,7 +16,7 @@ import {
 } from 'src/utils/responses/error.responses';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { AuthService } from '../service/auth.service';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { RegisterUserDto } from '../dto/register-user.dto';
 import { AuthUserResponseAttributes } from '../response/auth-user-response-attributes';
 
@@ -24,6 +25,7 @@ import { AuthUserResponseAttributes } from '../response/auth-user-response-attri
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @HttpCode(200)
   @Post('login')
   @ApiOperation({
     summary: 'Login user',
@@ -46,12 +48,14 @@ export class AuthController {
     return this.authService.loginUser(body);
   }
 
+  @HttpCode(201)
   @Post('register')
   @ApiOperation({
     summary: 'Register user',
     description:
       'User registration\n\nCreates a new user\nReturns user with token'
   })
+  @ApiCreatedResponse({ type: AuthUserResponseAttributes })
   @ApiConflictResponse({
     description: '409 - Email/Username taken',
     type: ConflictExceptionResponse
