@@ -31,14 +31,8 @@ import { HttpExceptionFilter } from './utils/filters/http-exception.filter';
     AuthModule
   ],
   providers: [
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter
-    },
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard
-    }
+    { provide: APP_FILTER, useClass: HttpExceptionFilter },
+    { provide: APP_GUARD, useClass: AuthGuard }
   ]
 })
 export class AppModule {}
