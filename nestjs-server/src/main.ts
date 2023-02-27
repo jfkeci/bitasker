@@ -17,6 +17,9 @@ async function bootstrap() {
   const port = config.get<number>('port');
   const prefix = config.get<string>('api_prefix');
 
+  /** Set CORS config so that only the client can make requests to the API */
+  app.enableCors({ origin: 'http://localhost:3000' });
+
   /**
    * Registers a prefix for every HTTP route path.
    * Ignores the base path "GET <baseUrl>/" used for healthcheck
