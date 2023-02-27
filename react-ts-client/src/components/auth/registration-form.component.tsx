@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import React, { useState } from 'react';
 import { User } from '../../models/user.model';
 import useAuthStore from '../../store/auth.store';
-import AuthFormInputComponent from './auth-form-input.component';
+import AppFormInputComponent from '../input/app-form-input.component';
 import { RegisterUserAttributes } from '../../services/auth.service';
 import useMessageStore, { AppMessage } from '../../store/message.store';
 
@@ -42,7 +42,7 @@ export default function RegistrationForm() {
           registerUser();
         }}
       >
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             property: 'firstName',
             label: 'First name',
@@ -61,7 +61,7 @@ export default function RegistrationForm() {
             },
           }}
         />
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             property: 'lastName',
             label: 'Last Name',
@@ -80,7 +80,7 @@ export default function RegistrationForm() {
             },
           }}
         />
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             type: 'email',
             property: 'email',
@@ -96,7 +96,7 @@ export default function RegistrationForm() {
             },
           }}
         />
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             type: 'password',
             property: 'password',
@@ -120,7 +120,7 @@ export default function RegistrationForm() {
             },
           }}
         />
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             type: 'password',
             property: 'confirmPassword',

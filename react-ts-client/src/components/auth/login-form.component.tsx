@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import React, { useState } from 'react';
 import { User } from '../../models/user.model';
 import useAuthStore from '../../store/auth.store';
-import AuthFormInputComponent from './auth-form-input.component';
+import AppFormInputComponent from '../input/app-form-input.component';
 import { LoginUserAttribtues } from '../../services/auth.service';
 import useMessageStore, { AppMessage } from '../../store/message.store';
 
@@ -35,7 +35,7 @@ export default function LoginForm() {
           loginUser();
         }}
       >
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             type: 'email',
             property: 'email',
@@ -51,7 +51,7 @@ export default function LoginForm() {
             },
           }}
         />
-        <AuthFormInputComponent
+        <AppFormInputComponent
           config={{
             type: 'password',
             property: 'password',

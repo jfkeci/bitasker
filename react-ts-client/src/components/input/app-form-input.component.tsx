@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
 
-export interface AuthFormInputComponentProps {
+export interface AppFormInputComponentProps {
   config: {
     property: string;
     label?: string;
@@ -14,8 +14,8 @@ export interface AuthFormInputComponentProps {
   };
 }
 
-export default function AuthFormInputComponent(
-  props: AuthFormInputComponentProps,
+export default function AppFormInputComponent(
+  props: AppFormInputComponentProps,
 ) {
   const [validationError, setValidationError] = useState('');
 
@@ -46,7 +46,7 @@ export default function AuthFormInputComponent(
             {props.config.label ?? ''}
           </label>
           <input
-            id={`auth-input-${props.config.property}`}
+            id={`app-input-${props.config.property}`}
             type={props.config.type ?? 'text'}
             name={props.config.property}
             className={
