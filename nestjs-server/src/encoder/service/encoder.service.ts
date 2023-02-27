@@ -1,13 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { WinstonLogger, WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { EncodedStringResponse } from '../responses/encoded-string.response';
 
 @Injectable()
 export class EncoderService {
   constructor(@Inject(WINSTON_MODULE_PROVIDER) private logger: WinstonLogger) {}
 
-  encodeV1(s: string): { encodedString: string; elapsed: number } {
-    const start = new Date().getTime();
-
+  encodeV1(s: string): EncodedStringResponse {
     let encodedString = '';
     let prevChar = s[0];
     let count = 1;
@@ -28,15 +27,10 @@ export class EncoderService {
 
     encodedString += prevChar + count.toString();
 
-    return {
-      encodedString,
-      elapsed: new Date().getTime() - start
-    };
+    return { text: encodedString };
   }
 
-  encodeV2(s: string): { encodedString: string; elapsed: number } {
-    const start = new Date().getTime();
-
+  encodeV2(s: string): EncodedStringResponse {
     const encodedArr = [];
     let prevChar = s[0];
     let count = 1;
@@ -57,40 +51,26 @@ export class EncoderService {
 
     encodedArr.push(`${prevChar}${count}`);
 
+    return { text: encodedArr.join('') };
+  }
+
+  encodeV3(s: string): EncodedStringResponse {
     return {
-      encodedString: encodedArr.join(''),
-      elapsed: new Date().getTime() - start
+      text: s
+        .split('')
+        .reduce((acc, char, i, arr) => {
+          if (char !== arr[i - 1])
+            acc.push(`${char}${arr.slice(i).indexOf(char)}`);
+
+          return acc;
+        }, [])
+        .join('')
     };
   }
 
-  encodeV3(s: string): { encodedString: string; elapsed: number } {
-    const start = new Date().getTime();
-
-    const encodedArr = s.split('').reduce((acc, char, i, arr) => {
-      if (char !== arr[i - 1]) acc.push(`${char}${arr.slice(i).indexOf(char)}`);
-
-      return acc;
-    }, []);
-
+  encodeV4(s: string): EncodedStringResponse {
     return {
-      encodedString: encodedArr.join(''),
-      elapsed: new Date().getTime() - start
-    };
-  }
-
-  encodeV4(s: string): { encodedString: string; elapsed: number } {
-    const start = new Date().getTime();
-
-    const encodedString = s.replace(
-      /(.)\1*/g,
-      (match, char) => `${char}${match.length}`
-    );
-
-    console.log(encodedString);
-
-    return {
-      encodedString,
-      elapsed: new Date().getTime() - start
+      text: s.replace(/(.)\1*/g, (match, char) => `${char}${match.length}`)
     };
   }
 }
