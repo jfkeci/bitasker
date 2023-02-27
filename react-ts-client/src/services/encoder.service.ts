@@ -5,6 +5,6 @@ export interface EncoderData {
 }
 
 export const encodeString = async (data: EncoderData): Promise<EncoderData> => {
-  const res = await axiosInstance.post(`/api/encoder`, data);
+  const res = await axiosInstance.post(`/api/encode`, data);
   return res.data;
 };
