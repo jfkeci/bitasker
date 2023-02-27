@@ -3,13 +3,14 @@ import { WinstonModule } from 'nest-winston';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { envConfig } from './utils/config/env.config';
-import { APP_FILTER, RouterModule } from '@nestjs/core';
 import { EncoderModule } from './encoder/encoder.module';
 import { AuthModule } from './resources/auth/auth.module';
 import { loggerConfig } from './utils/config/logger.config';
 import { routerConfig } from './utils/config/router.config';
 import { PrismaModule } from './utils/prisma/prisma.module';
 import { UsersModule } from './resources/users/users.module';
+import { AuthGuard } from './resources/auth/guards/auth.guard';
+import { APP_FILTER, APP_GUARD, RouterModule } from '@nestjs/core';
 import { HttpExceptionFilter } from './utils/filters/http-exception.filter';
 
 @Module({
@@ -33,11 +34,11 @@ import { HttpExceptionFilter } from './utils/filters/http-exception.filter';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter
-    }
-    /* {
+    },
+    {
       provide: APP_GUARD,
       useClass: AuthGuard
-    } */
+    }
   ]
 })
 export class AppModule {}
