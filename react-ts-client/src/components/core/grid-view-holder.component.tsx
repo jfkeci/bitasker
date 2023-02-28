@@ -1,6 +1,5 @@
 import React from 'react';
 import LoginView from '../../views/login.view';
-import LogoutView from '../../views/logout-view';
 import WelcomeView from '../../views/welcome.view';
 import EncoderView from '../../views/encoder.view';
 import RegisterView from '../../views/register.view';
@@ -16,7 +15,6 @@ export default function GridViewHolder() {
           <Routes>
             <Route path="/register" element={<RegisterView />} />
             <Route path="/encoder" element={<EncoderView />} />
-            <Route path="/logout" element={<LogoutView />} />
             <Route path="/login" element={<LoginView />} />
             <Route path="*" element={<NotFoundView />} />
             <Route path="/" element={<WelcomeView />} />
