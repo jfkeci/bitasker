@@ -1,17 +1,16 @@
 import React from 'react';
 import NavLink from './nav-link.component';
-import { useNavigate } from 'react-router-dom';
+
 import useAuthStore from '../../../store/auth.store';
 
 export default function NavLinks() {
-  const navigate = useNavigate();
   const logout = useAuthStore((state) => state.logout);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   const logoutUser = () => {
     logout();
 
-    navigate('/login');
+    window.location.href = 'http://localhost:3000/login';
   };
 
   return (

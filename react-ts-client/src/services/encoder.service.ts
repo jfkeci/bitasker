@@ -6,10 +6,10 @@ export interface EncoderData {
 
 export const encodeString = async (data: EncoderData): Promise<EncoderData> => {
   const res = await axiosInstance.post(`/api/encode`, {
-    data,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     },
+    data: data,
   });
   return res.data;
 };

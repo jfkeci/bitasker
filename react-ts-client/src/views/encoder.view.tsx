@@ -1,6 +1,5 @@
 import * as Joi from 'joi';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AppFormInputComponent from '../components/input/app-form-input.component';
 import { EncoderData, encodeString } from '../services/encoder.service';
 import useAuthStore from '../store/auth.store';
@@ -8,7 +7,6 @@ import useMessageStore from '../store/message.store';
 import { handleNetworkError } from '../utils/handle-network-error.util';
 
 export default function EncoderView() {
-  const navigate = useNavigate();
   const [encoderResult, setEncoderResult] = useState('');
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const addMessage = useMessageStore((state) => state.addMessage);
@@ -17,7 +15,9 @@ export default function EncoderView() {
     text: 'AAAMMMKKKKKKKKK',
   } as EncoderData);
 
-  if (!isLoggedIn()) navigate('/login');
+  if (!isLoggedIn()) {
+    window.location.href = 'http://localhost:3000/login';
+  }
 
   const encode = async () => {
     try {
