@@ -11,7 +11,7 @@ export default function LoginForm() {
   const login = useAuthStore((state) => state.login);
 
   const [loginData, setLoginData] = useState({
-    email: 'jakov@filpip.com',
+    email: 'tester1@test.com',
     password: 'Test@1234',
   } as LoginUserAttribtues);
 

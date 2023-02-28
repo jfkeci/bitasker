@@ -11,9 +11,9 @@ export default function RegistrationForm() {
   const register = useAuthStore((state) => state.register);
 
   const [registrationData, setRegistrationData] = useState({
-    firstName: 'Jakov',
-    lastName: 'Sabolicek',
-    email: 'jakov@filpip.com',
+    firstName: 'Tester1',
+    lastName: 'Test',
+    email: 'tester1@test.com',
     password: 'Test@1234',
     confirmPassword: 'Test@1234',
   } as RegisterUserAttributes);
