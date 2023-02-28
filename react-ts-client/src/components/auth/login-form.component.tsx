@@ -5,8 +5,10 @@ import useAuthStore from '../../store/auth.store';
 import AppFormInputComponent from '../input/app-form-input.component';
 import { LoginUserAttribtues } from '../../services/auth.service';
 import useMessageStore, { AppMessage } from '../../store/message.store';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const addMessage = useMessageStore((state) => state.addMessage);
   const login = useAuthStore((state) => state.login);
 
@@ -24,6 +26,8 @@ export default function LoginForm() {
         addMessage(message);
       }
     }
+
+    navigate('/encoder');
   };
 
   return (

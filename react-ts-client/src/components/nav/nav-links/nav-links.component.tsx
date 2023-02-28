@@ -1,16 +1,14 @@
 import React from 'react';
+import NavLink from './nav-link.component';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../../store/auth.store';
-import NavLink from './nav-link.component';
 
 export default function NavLinks() {
+  const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
-  const logout = () => {
-    const navigate = useNavigate();
-
-    const logout = useAuthStore((state) => state.logout);
-
+  const logoutUser = () => {
     logout();
 
     navigate('/login');
@@ -47,7 +45,7 @@ export default function NavLinks() {
           <li>
             <button
               className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              onClick={() => logout()}
+              onClick={() => logoutUser()}
             >
               Logout
             </button>

@@ -5,8 +5,10 @@ import useAuthStore from '../../store/auth.store';
 import AppFormInputComponent from '../input/app-form-input.component';
 import { RegisterUserAttributes } from '../../services/auth.service';
 import useMessageStore, { AppMessage } from '../../store/message.store';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegistrationForm() {
+  const navigate = useNavigate();
   const addMessage = useMessageStore((state) => state.addMessage);
   const register = useAuthStore((state) => state.register);
 
@@ -32,6 +34,8 @@ export default function RegistrationForm() {
         addMessage(message);
       }
     }
+
+    navigate('/encoder');
   };
 
   return (
