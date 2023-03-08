@@ -8,7 +8,8 @@ export class BananasController {
   @Get()
   test() {
     return {
-      banana: 'mango'
+      banana: 'mango',
+      apple: 'pear'
     };
   }
 }
