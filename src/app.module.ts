@@ -12,7 +12,7 @@ import { UsersModule } from './resources/users/users.module';
 import { AuthGuard } from './resources/auth/guards/auth.guard';
 import { APP_FILTER, APP_GUARD, RouterModule } from '@nestjs/core';
 import { HttpExceptionFilter } from './utils/filters/http-exception.filter';
-import { UsersModule } from './users/users.module';
+import { BananasModule } from './bananas/bananas.module';
 
 @Module({
   controllers: [AppController],
@@ -29,11 +29,12 @@ import { UsersModule } from './users/users.module';
     EncoderModule,
     PrismaModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    BananasModule
   ],
   providers: [
-    { provide: APP_FILTER, useClass: HttpExceptionFilter },
-    { provide: APP_GUARD, useClass: AuthGuard }
+    { provide: APP_FILTER, useClass: HttpExceptionFilter }
+    /* { provide: APP_GUARD, useClass: AuthGuard } */
   ]
 })
 export class AppModule {}
