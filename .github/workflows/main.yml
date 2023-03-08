@@ -1,8 +1,8 @@
-name: Deploy develop
+name: Deploy test
 on:
   push:
     branches:
-    - develop
+    - test
 
 jobs:
   build:
