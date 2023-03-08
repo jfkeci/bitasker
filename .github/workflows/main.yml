@@ -3,25 +3,31 @@ on:
   push:
     branches:
     - test
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Checkout source code
-      uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
 
-    - name: Generate deployment package
-      run: npm install && zip -r deploy.zip . -x '*.git*'
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v20
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: ${{ secrets.APPLICATION_NAME }}
-        environment_name: ${{ secrets.ENVIRONMENT_NAME }}
-        version_label: ${{github.SHA}}
-        region: us-east-1
-        deployment_package: deploy.zip
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ${{ secrets.AWS_REGION }}
+          application-name: ${{ secrets.APPLICATION_NAME }}
+          environment-name: ${{ secrets.ENVIRONMENT_NAME }}
+          version-label: ${{ github.sha }}
+          ignore-existing-version: true        
+
