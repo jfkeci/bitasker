@@ -9,6 +9,6 @@ export class AppController {
     description: 'Returns "String encoder Backend" if server is running'
   })
   healthcheck() {
-    return 'This is test';
+    return 'This is develop';
   }
 }
