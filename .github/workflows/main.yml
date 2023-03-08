@@ -28,6 +28,5 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           application_name: ${{ secrets.APPLICATION_NAME }}
           environment_name: ${{ secrets.ENVIRONMENT_NAME }}
-          version_label: ${{ github.sha }}
-          ignore_existing_version: true        
+          version_label: ${{ github.sha }}  
 
