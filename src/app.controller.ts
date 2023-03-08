@@ -1,14 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { AppService } from './app.service';
 
-@ApiTags('Healthcheck')
 @Controller()
 export class AppController {
+  constructor(private readonly appService: AppService) {}
+
   @Get()
-  @ApiOkResponse({
-    description: 'Returns "String encoder Backend" if server is running'
-  })
-  healthcheck() {
-    return 'This is develop';
+  getHello(): string {
+    return this.appService.getHello();
   }
 }
